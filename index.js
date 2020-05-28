@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const fullBoard = 42;
-const rowWidth = 7;
-const columnDepth = 6;
 
 function HeadSquare(props) {
     return (
@@ -41,42 +38,76 @@ class Board extends React.Component {
     );
   }
   
-  renderHeadRow() {   
-   let anyRow = Array.from(Array(rowWidth).keys());
-    return( anyRow.map((item) =>{
-      return (
-        this.renderHead(item)
-      );
-    }));
-  }
-
-  renderRow(j) {   
-   let anyRow = Array.from(Array(rowWidth).keys());
-    return( anyRow.map((item) =>{
-      return (
-        this.renderSquare(j*rowWidth+item)
-      );
-    }));
-  }
-  
-  renderColumns() {
-  let anyColumn = Array.from(Array(columnDepth).keys());
-    return( anyColumn.map((item)=>{
-      return(
-        <div className="board-row">
-          {this.renderRow(item)}
-        </div>
-      );
-    }));
-  }
-
   render() {
+  
     return (
       <div>
         <div className="board-row">
-          {this.renderHeadRow()}
-        </div>       
-        {this.renderColumns()}       
+          {this.renderHead(0)}
+          {this.renderHead(1)}
+          {this.renderHead(2)}
+          {this.renderHead(3)}
+          {this.renderHead(4)}
+          {this.renderHead(5)}
+          {this.renderHead(6)}
+        </div>
+        
+        <div className="board-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
+          {this.renderSquare(3)}
+          {this.renderSquare(4)}
+          {this.renderSquare(5)}
+          {this.renderSquare(6)}
+
+        </div>
+        <div className="board-row">
+	  {this.renderSquare(7)}
+          {this.renderSquare(8)}
+          {this.renderSquare(9)}
+          {this.renderSquare(10)}
+          {this.renderSquare(11)}
+          {this.renderSquare(12)}
+          {this.renderSquare(13)}
+        </div>
+<div className="board-row">
+          {this.renderSquare(14)}
+          {this.renderSquare(15)}
+          {this.renderSquare(16)}
+          {this.renderSquare(17)}
+          {this.renderSquare(18)}
+          {this.renderSquare(19)}
+          {this.renderSquare(20)}
+        </div>
+<div className="board-row">
+          {this.renderSquare(21)}
+          {this.renderSquare(22)}
+          {this.renderSquare(23)}
+          {this.renderSquare(24)}
+          {this.renderSquare(25)}
+          {this.renderSquare(26)}
+          {this.renderSquare(27)}
+        </div>
+<div className="board-row">
+          {this.renderSquare(28)}
+          {this.renderSquare(29)}
+          {this.renderSquare(30)}
+          {this.renderSquare(31)}
+          {this.renderSquare(32)}
+          {this.renderSquare(33)}
+          {this.renderSquare(34)}
+        </div>
+<div className="board-row">
+          {this.renderSquare(35)}
+          {this.renderSquare(36)}
+          {this.renderSquare(37)}
+          {this.renderSquare(38)}
+          {this.renderSquare(39)}
+          {this.renderSquare(40)}
+          {this.renderSquare(41)}
+        </div>
+
       </div>
     );
   }
@@ -90,7 +121,7 @@ class Game extends React.Component {
  //   const rowWidth = 7;
     this.state = {
       history: [{
-        squares: Array(fullBoard).fill(null), }],
+        squares: Array(fullBoard).fill(null),      }],
       stepNumber: 0,
       xIsNext: true,
       winner: null,
@@ -157,6 +188,11 @@ class Game extends React.Component {
     return (
       <table className="game">
       <tr>
+        <div>
+          <h1>Connect 4</h1><h3> Rules for this game and controls define <a href='#bottom'>below</a>.</h3>
+        </div>
+      </tr>
+      <tr>
       <td>
         <div className="game-board">
           <Board
@@ -173,6 +209,25 @@ class Game extends React.Component {
         </div>
         </td>
         </tr>
+        <tr id='bottom'>
+          <td colspan='2'>
+        This game is designed for two people playin on the same computer.<br/>
+The original Connect 4 game plays on vertical plane. Gravity cause your tocking to fall down to the bottom of the selected column.<br/>
+This computer version emulate original one. This rule restript possible locatoins of your tockens.<br/>
+
+To make next move player selected slot by clicking on numbered squere. <br/>
+Program indicates the next move on the right upper corner. End of game indicated by red message "Game is Over".<br/>
+The first player to put 4-in-a-row wins! Row could be horisontal, vertical, or diagonal.<br/>
+Game could be ended by draw if all positions are taken.<br/>
+This Program quetly ignores on completed column.<br/>
+
+Program recorded all steps of game and it allowes to roll back  by clicking on corresponding step on right side of feild.<br/>
+You can resume game from any position. <br/>
+Game could be started from begining by reloading this page or click to the start of the game button on the right side.<br/>
+
+Have a fun!<br/>
+          </td>
+        </tr>
       </table>
     );
   }
@@ -184,12 +239,13 @@ ReactDOM.render(
   <Game />,
   document.getElementById('root')
 );
-
+const fullBoard = 42;
+const rowWidth = 7;
 function calculateWinner(squares,j) {
-  
+  //alert("calcWinner sq="+squares[j]+" j="+j);
   const curType = squares[j];
   const leftEdge = j-(j%rowWidth);
-  const rightEdge = leftEdge+rowWidth;
+  const rightEdge = leftEdge+rowWidth-1;
   
   //alert("left and right Edge:"+leftEdge+" "+rightEdge);
   
@@ -215,10 +271,13 @@ function calculateWinner(squares,j) {
   // count diagonal left
   length = 0;
   for(let k=j;k<fullBoard;k=k+rowWidth+1){
+    if(k==rightEdge){length=0;}  
     if(squares[k]===curType) { length++;}
     else { break;}
   }
+  if(j==leftEdge){length=0;}
   for(let k=j-(rowWidth+1);k>-1;k=k-(rowWidth+1)){
+      if(k==leftEdge){length=0;}
     if(squares[k]===curType) { length++;}
     else { break;}
   }
@@ -227,10 +286,15 @@ function calculateWinner(squares,j) {
   // count diagonal right
   length = 0;
   for(let k=j;k<fullBoard;k=k+rowWidth-1){
-    if(squares[k]===curType) { length++;}
+      //alert("4 j="+j+" k="+k+" length="+length);
+      if(k==leftEdge) {length=0;}
+      if(squares[k]===curType) { length++;}
     else { break;}
   }
+  if(j==rightEdge){length=0;}
   for(let k=j-(rowWidth-1);k>-1;k=k-(rowWidth-1)){
+      //alert("42 j="+j+" k="+k+" length="+length);
+      if(k==rightEdge){length=0;}
     if(squares[k]===curType) { length++;}
     else { break;}
   }
