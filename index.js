@@ -211,7 +211,7 @@ class Game extends React.Component {
         </tr>
         <tr id='bottom'>
           <td colspan='2'>
-        This game is designed for two people playin on the same computer.<br/>
+        This game is designed for two people playing on the same computer.<br/>
 The original Connect 4 game plays on vertical plane. Gravity cause your tocking to fall down to the bottom of the selected column.<br/>
 This computer version emulate original one. This rule restript possible locatoins of your tockens.<br/>
 
