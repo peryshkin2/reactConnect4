@@ -212,18 +212,18 @@ class Game extends React.Component {
         <tr id='bottom'>
           <td colspan='2'>
         This game is designed for two people playing on the same computer.<br/>
-The original Connect 4 game plays on vertical plane. Gravity cause your tocking to fall down to the bottom of the selected column.<br/>
-This computer version emulate original one. This rule restript possible locatoins of your tockens.<br/>
+The original Connect 4 game plays on vertical plane. Gravity cause your token to fall down to the bottom of the selected column.<br/>
+This computer version emulate original one. This rule restrict possible locations of your tokens.<br/>
 
-To make next move player selected slot by clicking on numbered squere. <br/>
+To make next move player selected slot by clicking on numbered square. <br/>
 Program indicates the next move on the right upper corner. End of game indicated by red message "Game is Over".<br/>
-The first player to put 4-in-a-row wins! Row could be horisontal, vertical, or diagonal.<br/>
+The first player to put 4-in-a-row wins! Row could be horizontal, vertical, or diagonal.<br/>
 Game could be ended by draw if all positions are taken.<br/>
-This Program quetly ignores on completed column.<br/>
+This Program quietly ignores on completed column.<br/>
 
-Program recorded all steps of game and it allowes to roll back  by clicking on corresponding step on right side of feild.<br/>
+Program recorded all steps of game and it allows to roll back  by clicking on corresponding step on right side of field.<br/>
 You can resume game from any position. <br/>
-Game could be started from begining by reloading this page or click to the start of the game button on the right side.<br/>
+Game could be started from beginning by reloading this page or click to the start of the game button on the right side.<br/>
 
 Have a fun!<br/>
           </td>
