@@ -241,6 +241,13 @@ ReactDOM.render(
 );
 const fullBoard = 42;
 const rowWidth = 7;
+
+function leftE(kk){
+    return (kk-(kk%rowWidth));
+}
+function rightE(kk){
+    return ( kk-(kk%rowWidth)+rowWidth-1);
+}
 function calculateWinner(squares,j) {
   //alert("calcWinner sq="+squares[j]+" j="+j);
   const curType = squares[j];
@@ -275,7 +282,7 @@ function calculateWinner(squares,j) {
     if(squares[k]===curType) {
          length++;
          if( length>3) { return curType; }
-         if(k===rightEdge){break;}
+         if(k===rightE(k)){break;}
          }
     else { break;}
   }
@@ -284,7 +291,7 @@ function calculateWinner(squares,j) {
     if(squares[k]===curType) {
          length++;
          if( length>3) { return curType; }
-         if(k===leftEdge){break;}
+         if(k===leftE(k)){break;}
          }
     else { break;}
   }
@@ -293,22 +300,22 @@ function calculateWinner(squares,j) {
   // count diagonal right
   length = 0;
   for(let k=j;k<fullBoard;k=k+rowWidth-1){
-      //alert("4 j="+j+" k="+k+" length="+length);     
+      //alert("4 j="+j+" k="+k+" length="+length+" left="+leftEdge);     
       if(squares[k]===curType) {
            length++;
            if( length>3) { return curType; }
-           if(k===leftEdge) {break;}
+           if(k===leftE(k)) {break;}
            }
     else { break;}
   }
   if(j===rightEdge){length=1;}
   for(let k=j-(rowWidth-1);k>-1;k=k-(rowWidth-1)){
-      //alert("42 j="+j+" k="+k+" length="+length);
+      //alert("49 j="+j+" k="+k+" length="+length+" right="+rightEdge);
       
     if(squares[k]===curType) {
          length++;
          if( length>3) { return curType; }
-         if(k===rightEdge){break;}
+         if(k===rightE(k)){break;}
          }
     else { break;}
   }
