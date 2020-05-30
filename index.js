@@ -251,7 +251,7 @@ function calculateWinner(squares,j) {
   
   // count holizontal length
   let length = 0;
-  for(let k=leftEdge;k<rightEdge;k++){
+  for(let k=leftEdge;k<rightEdge+1;k++){
   //alert("1 j="+j+" k="+k+" length="+length);
     if(squares[k]===curType)  length++;
     else  {
@@ -271,14 +271,21 @@ function calculateWinner(squares,j) {
   // count diagonal left
   length = 0;
   for(let k=j;k<fullBoard;k=k+rowWidth+1){
-    if(k==rightEdge){length=0;}  
-    if(squares[k]===curType) { length++;}
+      
+    if(squares[k]===curType) {
+         length++;
+         if( length>3) { return curType; }
+         if(k===rightEdge){break;}
+         }
     else { break;}
   }
-  if(j==leftEdge){length=0;}
-  for(let k=j-(rowWidth+1);k>-1;k=k-(rowWidth+1)){
-      if(k==leftEdge){length=0;}
-    if(squares[k]===curType) { length++;}
+  if(j===leftEdge){length=1;}
+  for(let k=j-(rowWidth+1);k>-1;k=k-(rowWidth+1)){     
+    if(squares[k]===curType) {
+         length++;
+         if( length>3) { return curType; }
+         if(k===leftEdge){break;}
+         }
     else { break;}
   }
   if( length>3) { return curType; }
@@ -286,16 +293,23 @@ function calculateWinner(squares,j) {
   // count diagonal right
   length = 0;
   for(let k=j;k<fullBoard;k=k+rowWidth-1){
-      //alert("4 j="+j+" k="+k+" length="+length);
-      if(k==leftEdge) {length=0;}
-      if(squares[k]===curType) { length++;}
+      //alert("4 j="+j+" k="+k+" length="+length);     
+      if(squares[k]===curType) {
+           length++;
+           if( length>3) { return curType; }
+           if(k===leftEdge) {break;}
+           }
     else { break;}
   }
-  if(j==rightEdge){length=0;}
+  if(j===rightEdge){length=1;}
   for(let k=j-(rowWidth-1);k>-1;k=k-(rowWidth-1)){
       //alert("42 j="+j+" k="+k+" length="+length);
-      if(k==rightEdge){length=0;}
-    if(squares[k]===curType) { length++;}
+      
+    if(squares[k]===curType) {
+         length++;
+         if( length>3) { return curType; }
+         if(k===rightEdge){break;}
+         }
     else { break;}
   }
   if( length>3) { return curType; }
